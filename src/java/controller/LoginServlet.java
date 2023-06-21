@@ -79,7 +79,6 @@ public class LoginServlet extends HttpServlet {
         AccountsDAO adao = new AccountsDAO();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(username);
         try {
             if (adao.checkLogin(username, password)) {
                 // Credentials are valid, create a session and save the account information
@@ -88,7 +87,6 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("role", adao.getRole(username)); // Assuming you have a getRole method in your AccountsDAO
                 session.setAttribute("loginSuccess", true); // Set login success attribute
                 response.sendRedirect("dashboard");
-               
             } else {
                 // Invalid credentials, redirect back to the login page with an error message
                 response.sendRedirect("login.jsp?error=Invalid username or password.");

@@ -23,11 +23,10 @@ public class CoursesDAO extends DBContext {
     List<Courses> list = new ArrayList<>();
 
     public List<Courses> getCoursesByTeacherId(int id) {
-        String sql = "SELECT c.*\n"
+        String sql = "SELECT DISTINCT c.*\n"
                 + "  FROM [dbo].[teaching] t join [dbo].[courses] c\n"
                 + "  ON  t.courseId = c.id\n"
-                + "  WHERE [teacherId] = ?\n"
-                + "  GROUP BY c.id, c.rollId, c.name";
+                + "  WHERE [teacherId] = ?";
         try {
 
             stm = connection.prepareStatement(sql);

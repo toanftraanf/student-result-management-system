@@ -76,26 +76,13 @@
                     <div class="navbar-nav w-100">
                         <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="button.html" class="dropdown-item">Buttons</a>
-                                <a href="typography.html" class="dropdown-item">Typography</a>
-                                <a href="element.html" class="dropdown-item">Other Elements</a>
-                            </div>
-                        </div>
                         <c:forEach items="${courses}" var="c">
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>${c.rollId}</a>
-                                <div class="dropdown-menu bg-transparent border-0">
-                                    <a href="signin.html" class="dropdown-item">Sign In</a>
-                                    <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                    <a href="404.html" class="dropdown-item">404 Error</a>
-                                    <a href="blank.html" class="dropdown-item">Blank Page</a>
+                                <a onclick="loadClasses(${c.id}, '<%=session.getAttribute("username") %>')" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-file-alt me-2"></i>${c.rollId}</a>
+                                <div id="aaa${c.id}" class="dropdown-menu bg-transparent border-0">
                                 </div>
                             </div>
                         </c:forEach>
-
                     </div>
                 </nav>
             </div>
@@ -302,10 +289,13 @@
         <script src="lib/tempusdominus/js/moment.min.js"></script>
         <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script src="js/popup.js" type="text/javascript"></script>
+
     </body>
 
 </html>
