@@ -4,17 +4,15 @@
  */
 package DAO;
 
-import dal.ClassesDAO;
-import java.util.List;
-import model.Classes;
+import dal.StudentsDAO;
 
 /**
  *
  * @author trant
  */
-public class classTest {
+public class studentDAO {
     public static void main(String[] args) {
-        ClassesDAO c = new ClassesDAO();
-        System.out.println(c.getClassById(1));
+        StudentsDAO d = new StudentsDAO();
+        System.out.println(d.getStudentById(1));
     }
 }

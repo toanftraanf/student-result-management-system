@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Classes;
 
 /**
@@ -21,6 +23,23 @@ public class ClassesDAO extends DBContext {
     PreparedStatement stm;
     ResultSet rs;
     List<Classes> list = new ArrayList<>();
+    
+    public Classes getClassById(int id) {
+        String sql = "SELECT *\n"
+                + "  FROM [dbo].[classes]\n"
+                + "  where [id] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Classes(rs.getInt("id"), rs.getString("name"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public List<Classes> getClasses(int teacherId, int courseId) {
         String sql = "select * from classes where id in (select t.classId\n"
@@ -37,8 +56,8 @@ public class ClassesDAO extends DBContext {
                 Classes em = new Classes(rs.getInt("id"), rs.getString("name"));
                 list.add(em);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
