@@ -41,7 +41,7 @@
                     <c:forEach items="${dao.getCoursesByTeacherId(teacherId)}" var="c">
                         <div class="nav-item dropdown">
                             <a onclick="loadClasses(${c.id}, '<%=session.getAttribute("username") %>')" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-file-alt me-2"></i>${c.rollId}</a>
-                            <div id="classes${c.id}" class="dropdown-menu bg-transparent border-0">
+                            <div id="aaa${c.id}" class="dropdown-menu bg-transparent border-0">
                             </div>
                         </div>
                     </c:forEach>

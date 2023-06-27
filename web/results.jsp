@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="dao" class="dal.ResultsDAO" scope="request" ></jsp:useBean>
+<jsp:useBean id="rdao" class="dal.ResultsDAO" scope="request" ></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +76,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${dao.getResults(courseId, classId)}" var="c">
+                                        <c:forEach items="${rdao.getResults(courseId, classId)}" var="c">
                                                 <c:set var="total" value="${c.result1*0.2+c.result2*0.2+c.result3*0.3+c.result4*0.3}"/>
                                                 <fmt:formatNumber var="formattedTotal" value="${total}" pattern="#0.0" />
                                                 <tr>

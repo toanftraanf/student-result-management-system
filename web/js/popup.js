@@ -46,7 +46,7 @@ function loadClasses(courseId, username) {
             username: username
         },
         success: function (response) {
-            var course = document.getElementById("classes" + courseId);
+            var course = document.getElementById("aaa" + courseId);
             course.innerHTML = response;
         }
     });
