@@ -36,6 +36,7 @@ window.onload = function () {
 };
 
 //Load classes of course being chosen
+
 function loadClasses(courseId, username) {
     $.ajax({
         url: "/SRMS_Assignment/load-classes",
@@ -44,9 +45,10 @@ function loadClasses(courseId, username) {
             cId: courseId,
             username: username
         },
-        success: function(response) {
-            var course = document.getElementById("aaa"+courseId);
+        success: function (response) {
+            var course = document.getElementById("classes" + courseId);
             course.innerHTML = response;
         }
     });
 };
+

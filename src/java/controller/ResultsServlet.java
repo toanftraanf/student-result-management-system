@@ -68,25 +68,31 @@ public class ResultsServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     int id;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         // If the logged-in user is a teacher, retrieve the list of courses they teach
-        int teacherId = adao.getTeacherId((String) session.getAttribute("username")); // Assuming you have a method to retrieve the teacher ID
+        int teacherId = (int) session.getAttribute("teacherId"); // Assuming you have a method to retrieve the teacher ID
         List<Courses> courses = cdao.getCoursesByTeacherId(teacherId); // Replace this with your actual method to get the courses by teacher ID
         request.setAttribute("courses", courses);
         try {
             id = Integer.parseInt(request.getParameter("id"));
             int courseId = tdao.getCourseIdByTeachingId(id);
             int classId = tdao.getClassIdByTeachingId(id);
-            List<Results> list = rdao.getResults(courseId, classId);
-            request.setAttribute("grade", list);
+//            List<Results> list = rdao.getResults(courseId, classId);
+//            request.removeAttribute("grade");
+//            request.setAttribute("grade", list);
+              request.setAttribute("courseId", courseId);
+              request.setAttribute("classId", classId);
             request.getRequestDispatcher("results.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
+        request.removeAttribute("courses");
+        request.removeAttribute("grade");
     }
 
     /**

@@ -158,8 +158,7 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-        <script src="js/popup.js" type="text/javascript"></script>
-
+        <script src="js/popup.js"></script>
     </body>
 
 </html>
