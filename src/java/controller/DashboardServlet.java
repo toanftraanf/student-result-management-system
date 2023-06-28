@@ -69,7 +69,7 @@ public class DashboardServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         // If the logged-in user is a teacher, retrieve the list of courses they teach
-        int teacherId = adao.getTeacherId((String) session.getAttribute("username")); // Assuming you have a method to retrieve the teacher ID
+        int teacherId = (int)session.getAttribute("teacherId"); // Assuming you have a method to retrieve the teacher ID
         List<Courses> courses = cdao.getCoursesByTeacherId(teacherId); // Replace this with your actual method to get the courses by teacher ID
         request.setAttribute("courses", courses);
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
