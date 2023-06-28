@@ -6,6 +6,7 @@
 package controller;
 
 import dal.ResultsDAO;
+import dal.TeachingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -70,9 +71,13 @@ public class DeleteResultServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ResultsDAO rdao = new ResultsDAO();
+        TeachingDAO tdao = new TeachingDAO();
         int id = Integer.parseInt(request.getParameter("id"));
+        int cid = Integer.parseInt(request.getParameter("cid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        int a = tdao.getTeachingIdByCourseAndStudent(cid, sid);
         rdao.deleteResult(id);
-        response.sendRedirect("results");
+        response.sendRedirect("results?id=" + a);
     }
 
     /** 

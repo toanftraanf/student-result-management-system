@@ -99,7 +99,7 @@
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-square btn-outline-warning" href=""><i class="fa fa-edit"></i></a>
-                                                        <a onclick="onMess(${c.id})" class="btn btn-square btn-outline-danger" href=""><i class="fa fa-trash"></i></a>
+                                                        <a onclick="onMess(${c.id}, ${c.courses.id}, ${c.students.id})" class="btn btn-square btn-outline-danger" href=""><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -140,9 +140,9 @@
         <script src="js/main.js"></script>
         <script src="js/popup.js"></script>
         <script>
-            function onMess(id) {
+            function onMess(id, cid, sid) {
             if (confirm("Are you sure to delete this student's grades?")) {
-                window.location.href = "delete-grade?id=" + id;
+                window.location.href = "delete-grade?id=" + id + "&cid=" + cid + "&sid=" + sid;
             }
         }
         </script>
