@@ -72,4 +72,25 @@ public class ResultsDAO extends DBContext {
         }
         return list;
     }
+
+    public void deleteResult(int id) {
+        String sql = "UPDATE [dbo].[results]\n"
+                + "   SET [result1] = null\n"
+                + "      ,[result2] = null\n"
+                + "      ,[result3] = null\n"
+                + "      ,[result4] = null\n"
+                + " WHERE id = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        ResultsDAO r = new ResultsDAO();
+        r.deleteResult(4);
+    }
 }

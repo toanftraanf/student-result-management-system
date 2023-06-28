@@ -42,19 +42,19 @@
         </div>
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
-            <jsp:include page="/components/spinner.jsp"></jsp:include>
+            <jsp:include page="components/spinner.jsp"></jsp:include>
                 <!-- Spinner End -->
 
 
                 <!-- Sidebar Start -->
-            <jsp:include page="/components/sidebar.jsp"></jsp:include>
+            <jsp:include page="components/sidebar.jsp"></jsp:include>
                 <!-- Sidebar End -->
 
 
                 <!-- Content Start -->
                 <div class="content">
                     <!-- Navbar Start -->
-                <jsp:include page="/components/navbar.jsp"></jsp:include>
+                <jsp:include page="components/navbar.jsp"></jsp:include>
                     <!-- Navbar End -->
 
                     <!-- Recent Sales Start -->
@@ -133,7 +133,7 @@
 
 
                     <!-- Footer Start -->
-                <jsp:include page="/components/footer.jsp"></jsp:include>
+                <jsp:include page="components/footer.jsp"></jsp:include>
                 <!-- Footer End -->
             </div>
             <!-- Content End -->

@@ -38,12 +38,12 @@
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
-            <jsp:include page="/components/spinner.jsp"></jsp:include>
+            <jsp:include page="components/spinner.jsp"></jsp:include>
             <!-- Spinner End -->
 
 
             <!-- Sidebar Start -->
-            <jsp:include page="/components/sidebar.jsp"></jsp:include>
+            <jsp:include page="components/sidebar.jsp"></jsp:include>
             <!-- Sidebar End -->
 
 
@@ -51,7 +51,7 @@
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <jsp:include page="/components/navbar.jsp"></jsp:include>
+                <jsp:include page="components/navbar.jsp"></jsp:include>
                 <!-- Navbar End -->
 
 
@@ -65,7 +65,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
+                                                <th scope="col">RollID</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Progress Test (20%)</th>
                                                 <th scope="col">Workshop (20%)</th>
@@ -97,7 +97,10 @@
                                                     <td style="color:${formattedTotal >= 5.0 ? 'green' : 'red'}">
                                                         ${formattedTotal}
                                                     </td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Update</a></td>
+                                                    <td>
+                                                        <a class="btn btn-square btn-outline-warning" href=""><i class="fa fa-edit"></i></a>
+                                                        <a onclick="onMess(${c.id})" class="btn btn-square btn-outline-danger" href=""><i class="fa fa-trash"></i></a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
 
@@ -112,7 +115,7 @@
 
 
                 <!-- Footer Start -->
-                <jsp:include page="/components/footer.jsp"></jsp:include>
+                <jsp:include page="components/footer.jsp"></jsp:include>
                 <!-- Footer End -->
             </div>
             <!-- Content End -->
@@ -136,6 +139,13 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script src="js/popup.js"></script>
+        <script>
+            function onMess(id) {
+            if (confirm("Are you sure to delete this student's grades?")) {
+                window.location.href = "delete-grade?id=" + id;
+            }
+        }
+        </script>
     </body>
 
 </html>

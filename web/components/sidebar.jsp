@@ -36,7 +36,6 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <c:set var="teacherId" scope="session" value='<%=(int)session.getAttribute("teacherId") %>'></c:set>
                     <c:forEach items="${dao.getCoursesByTeacherId(teacherId)}" var="c">
                         <div class="nav-item dropdown">
