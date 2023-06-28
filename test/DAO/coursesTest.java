@@ -15,6 +15,9 @@ import model.Courses;
 public class coursesTest {
     public static void main(String[] args) {
         CoursesDAO d = new CoursesDAO();
-        System.out.println(d.getCourseById(1));
+        List<Courses> list = d.getCoursesByTeacherId(1);
+        for(Courses o:list) {
+            System.out.println(o);
+        }
     }
 }

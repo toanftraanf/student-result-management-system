@@ -5,6 +5,8 @@
 package DAO;
 
 import dal.TeachingDAO;
+import java.util.List;
+import model.Teaching;
 
 /**
  *
@@ -13,6 +15,9 @@ import dal.TeachingDAO;
 public class teachingDAO {
     public static void main(String[] args) {
         TeachingDAO d = new TeachingDAO();
-        System.out.println(d.getClassIdByTeachingId(2));
+        List<Teaching> list = d.getAllTeaching();
+        for(Teaching o:list) {
+            System.out.println(o);
+        }
     }
 }
