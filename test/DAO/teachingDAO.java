@@ -15,7 +15,7 @@ import model.Teaching;
 public class teachingDAO {
     public static void main(String[] args) {
         TeachingDAO d = new TeachingDAO();
-        List<Teaching> list = d.getAllTeaching();
+        List<Teaching> list = d.getTeachingByCourseAndTeacher(3, 1);
         for(Teaching o:list) {
             System.out.println(o);
         }

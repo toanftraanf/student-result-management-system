@@ -45,6 +45,26 @@ public class TeachingDAO extends DBContext {
         }
         return list;
     }
+    
+    public List<Teaching> getTeachingByCourseAndTeacher(int cid, int tid) {
+        String sql = "SELECT * FROM teaching WHERE courseId = ? AND teacherId = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, cid);
+            stm.setInt(2, tid);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Teaching em = new Teaching(rs.getInt(1)
+                        , tdao.getTeacherById(rs.getInt(2))
+                        , cdao.getCourseById(rs.getInt(3))
+                        , classDao.getClassById(rs.getInt(4)));
+                list.add(em);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeachingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public int getTeachingId(int teacherId, int courseId, int classId) {
         String sql = "SELECT id FROM teaching WHERE teacherId = ? AND courseId = ? AND classId = ?";
