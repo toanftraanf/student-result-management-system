@@ -22,12 +22,12 @@ public class TeachingDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
-    List<Teaching> list = new ArrayList<>();
     TeachersDAO tdao = new TeachersDAO();
     CoursesDAO cdao = new CoursesDAO();
     ClassesDAO classDao = new ClassesDAO();
 
     public List<Teaching> getAllTeaching() {
+        List<Teaching> list = new ArrayList<>();
         String sql = "SELECT * FROM teaching";
         try {
 
@@ -47,6 +47,7 @@ public class TeachingDAO extends DBContext {
     }
 
     public List<Teaching> getTeachingByCourseAndTeacher(int cid, int tid) {
+        List<Teaching> list = new ArrayList<>();
         String sql = "SELECT * FROM teaching WHERE courseId = ? AND teacherId = ?";
         try {
             stm = connection.prepareStatement(sql);
@@ -54,10 +55,12 @@ public class TeachingDAO extends DBContext {
             stm.setInt(2, tid);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Teaching em = new Teaching(rs.getInt(1),
+                Teaching em = new Teaching(
+                         rs.getInt(1),
                          tdao.getTeacherById(rs.getInt(2)),
                          cdao.getCourseById(rs.getInt(3)),
-                         classDao.getClassById(rs.getInt(4)));
+                         classDao.getClassById(rs.getInt(4))
+                );
                 list.add(em);
             }
         } catch (SQLException ex) {
@@ -138,6 +141,6 @@ public class TeachingDAO extends DBContext {
 
     public static void main(String[] args) {
         TeachingDAO d = new TeachingDAO();
-        System.out.println(d.getTeachingIdByCourseAndStudent(1, 1));
+        System.out.println(d.getTeachingByCourseAndTeacher(1, 1));
     }
 }

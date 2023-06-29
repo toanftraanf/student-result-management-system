@@ -5,8 +5,8 @@
 package controller;
 
 import dal.AccountsDAO;
-import dal.ClassesDAO;
 import dal.CoursesDAO;
+import dal.TeachingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Classes;
 import model.Courses;
+import model.Teaching;
 
 /**
  *
@@ -66,12 +66,16 @@ public class DashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         AccountsDAO adao = new AccountsDAO();
         CoursesDAO cdao = new CoursesDAO();
+        TeachingDAO tdao = new TeachingDAO();
         
         HttpSession session = request.getSession();
         // If the logged-in user is a teacher, retrieve the list of courses they teach
         int teacherId = (int)session.getAttribute("teacherId"); // Assuming you have a method to retrieve the teacher ID
-        List<Courses> courses = cdao.getCoursesByTeacherId(teacherId); // Replace this with your actual method to get the courses by teacher ID
+        List<Courses> courses = cdao.getCoursesByTeacherId(teacherId); 
+        //Set sidebar's attributes
         request.setAttribute("courses", courses);
+        List<Teaching> teaching  = tdao.getAllTeaching();
+        request.setAttribute("teaching", teaching);
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
     }
 

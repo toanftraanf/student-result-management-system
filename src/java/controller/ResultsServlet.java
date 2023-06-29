@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Courses;
-import model.Results;
+import model.Teaching;
 
 /**
  *
@@ -82,17 +82,14 @@ public class ResultsServlet extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
             int courseId = tdao.getCourseIdByTeachingId(id);
             int classId = tdao.getClassIdByTeachingId(id);
-//            List<Results> list = rdao.getResults(courseId, classId);
-//            request.removeAttribute("grade");
-//            request.setAttribute("grade", list);
-              request.setAttribute("courseId", courseId);
-              request.setAttribute("classId", classId);
+            request.setAttribute("courseId", courseId);
+            request.setAttribute("classId", classId);
+            List<Teaching> teaching = tdao.getAllTeaching();
+            request.setAttribute("teaching", teaching);
             request.getRequestDispatcher("results.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        request.removeAttribute("courses");
-        request.removeAttribute("grade");
     }
 
     /**

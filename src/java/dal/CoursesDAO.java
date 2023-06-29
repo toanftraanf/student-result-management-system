@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Courses;
+import model.Teaching;
 
 /**
  *
@@ -59,5 +60,18 @@ public class CoursesDAO extends DBContext {
             Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+    public static void main(String[] args) {
+        CoursesDAO c = new CoursesDAO();
+        TeachingDAO t = new TeachingDAO();
+        List<Courses> list = c.getCoursesByTeacherId(1);
+        
+        for(Courses o:list) {
+            System.out.println(o.getId()+" "+1);
+            List<Teaching> teachList = t.getTeachingByCourseAndTeacher(o.getId(), 1);
+            for(Teaching a:teachList) {
+                System.out.println(a);
+            }
+        }
     }
 }
