@@ -38,6 +38,7 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <c:set var="teacherId" scope="session" value='<%=(int)session.getAttribute("teacherId") %>'></c:set>
+                    ${teacherId}
                     <c:forEach items="${dao.getCoursesByTeacherId(teacherId)}" var="c">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-file-alt me-2"></i>${c.rollId}</a>
