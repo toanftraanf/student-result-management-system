@@ -44,7 +44,9 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-file-alt me-2"></i>${c.rollId}</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <c:forEach items="${tdao.getTeachingByCourseAndTeacher(c.id, teacherId)}" var="t">
+                                    <c:if test="${t.classes.name != null}">
                                         <a href="results?id=${t.id}" class="dropdown-item">${t.classes.name}</a>
+                                    </c:if>
                                 </c:forEach>
                             </div>
                         </div>
