@@ -27,6 +27,8 @@
             <!-- Libraries Stylesheet -->
             <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
             <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+            <link href="toast.style.min.css" rel="stylesheet">
+
 
             <!-- Customized Bootstrap Stylesheet -->
             <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +82,7 @@
                                                     <th scope="row">${c.students.rollId}</th>
                                                     <td>${c.students.name}</td>
                                                     <td>
-                                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Check student's infomation"><i class="fa fa-eye"></i></a>
                                                     </td>
                                                     <td>
                                                         ${c.result1 == null ? "-":c.result1}
@@ -98,10 +100,17 @@
                                                         ${formattedTotal}
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-square btn-outline-warning" href=""><i class="fa fa-edit"></i></a>
-                                                        <a class="btn btn-square btn-outline-danger" href="delete-result?id=${c.id}&cid=${c.courses.id}&sid=${c.students.id}"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
+                                                        <a class="btn btn-square btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Update" href="">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteModal(${c.id}, ${c.courses.id}, ${c.students.id})">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+
+                                                        <!-- Modal -->
+                                                        <jsp:include page="components/delete_modal.jsp"></jsp:include>
+                                                        </td>
+                                                    </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -137,11 +146,24 @@
         <script src="js/main.js"></script>
         <script src="js/popup.js"></script>
         <script>
-            function onMess(id, cid, sid) {
-                if (confirm("Are you sure to delete this student's grades?")) {
-                    window.location.href = "delete-result?id=" + id + "&cid=" + cid + "&sid=" + sid;
-                }
-            }
+                                                            $(function () {
+                                                                $('[data-toggle="tooltip"]').tooltip();
+                                                            });
+
+                                                            $('#myModal').on('shown.bs.modal', function () {
+                                                                $('#myInput').trigger('focus');
+                                                            });
+
+                                                            function openDeleteModal(id, courseId, studentId) {
+                                                                $('#deleteModal').modal('show');
+                                                                $('#deleteButton').attr('href', 'delete-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
+                                                            }
+
+                                                            function showPopupAlert(title, message) {
+                                                                document.getElementById('popupTitle').textContent = title;
+                                                                document.getElementById('popupBody').textContent = message;
+                                                                $('.toast').toast('show');
+                                                            }
         </script>
     </body>
 
