@@ -2,86 +2,86 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="rdao" class="dal.ResultsDAO" scope="request" ></jsp:useBean>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <title>RESULTS</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
+        <head>
+            <meta charset="utf-8">
+            <title>RESULTS</title>
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+            <meta content="" name="keywords">
+            <meta content="" name="description">
 
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+            <!-- Favicon -->
+            <link href="img/favicon.ico" rel="icon">
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <!-- Google Web Fonts -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+            <!-- Icon Font Stylesheet -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+            <!-- Libraries Stylesheet -->
+            <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+            <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+            <!-- Customized Bootstrap Stylesheet -->
+            <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+            <!-- Template Stylesheet -->
+            <link href="css/style.css" rel="stylesheet">
+        </head>
 
-    <body>
-        <div class="container-fluid position-relative bg-white d-flex p-0">
-            <!-- Spinner Start -->
+        <body>
+            <div class="container-fluid position-relative bg-white d-flex p-0">
+                <!-- Spinner Start -->
             <jsp:include page="components/spinner.jsp"></jsp:include>
-            <!-- Spinner End -->
+                <!-- Spinner End -->
 
-
-            <!-- Sidebar Start -->
+                <!-- Sidebar Start -->
             <jsp:include page="components/sidebar.jsp"></jsp:include>
-            <!-- Sidebar End -->
+                <!-- Sidebar End -->
 
-
-
-            <!-- Content Start -->
-            <div class="content">
-                <!-- Navbar Start -->
+                <!-- Content Start -->
+                <div class="content">
+                    <!-- Navbar Start -->
                 <jsp:include page="components/navbar.jsp"></jsp:include>
-                <!-- Navbar End -->
+                    <!-- Navbar End -->
 
-
-                <!-- Table Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">            
-                        <div class="col-12">
-                            <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Responsive Table</h6>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">RollID</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Progress Test (20%)</th>
-                                                <th scope="col">Workshop (20%)</th>
-                                                <th scope="col">Practical Exam (30%)</th>
-                                                <th scope="col">Final Exam (30%)</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${rdao.getResults(courseId, classId)}" var="c">
+                    <!-- Table Start -->
+                    <div class="container-fluid pt-4 px-4">
+                        <div class="row g-4">            
+                            <div class="col-12">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <h6 class="mb-4">Responsive Table</h6>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">RollID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Info</th>
+                                                    <th scope="col">Progress Test (20%)</th>
+                                                    <th scope="col">Workshop (20%)</th>
+                                                    <th scope="col">Practical Exam (30%)</th>
+                                                    <th scope="col">Final Exam (30%)</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${rdao.getResults(courseId, classId)}" var="c">
                                                 <c:set var="total" value="${c.result1*0.2+c.result2*0.2+c.result3*0.3+c.result4*0.3}"/>
                                                 <fmt:formatNumber var="formattedTotal" value="${total}" pattern="#0.0" />
                                                 <tr>
                                                     <th scope="row">${c.students.rollId}</th>
                                                     <td>${c.students.name}</td>
+                                                    <td>
+                                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                                    </td>
                                                     <td>
                                                         ${c.result1 == null ? "-":c.result1}
                                                     </td>
@@ -99,11 +99,10 @@
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-square btn-outline-warning" href=""><i class="fa fa-edit"></i></a>
-                                                        <a onclick="onMess(${c.id}, ${c.courses.id}, ${c.students.id})" class="btn btn-square btn-outline-danger" href=""><i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-square btn-outline-danger" href="delete-result?id=${c.id}&cid=${c.courses.id}&sid=${c.students.id}"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -113,13 +112,11 @@
                 </div>
                 <!-- Table End -->
 
-
                 <!-- Footer Start -->
                 <jsp:include page="components/footer.jsp"></jsp:include>
                 <!-- Footer End -->
             </div>
             <!-- Content End -->
-
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -141,10 +138,10 @@
         <script src="js/popup.js"></script>
         <script>
             function onMess(id, cid, sid) {
-            if (confirm("Are you sure to delete this student's grades?")) {
-                window.location.href = "delete-grade?id=" + id + "&cid=" + cid + "&sid=" + sid;
+                if (confirm("Are you sure to delete this student's grades?")) {
+                    window.location.href = "delete-result?id=" + id + "&cid=" + cid + "&sid=" + sid;
+                }
             }
-        }
         </script>
     </body>
 
