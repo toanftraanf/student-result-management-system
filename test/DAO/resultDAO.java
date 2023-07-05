@@ -15,9 +15,6 @@ import model.Results;
 public class resultDAO {
     public static void main(String[] args) {
         ResultsDAO r = new ResultsDAO();
-        List<Results> list = r.getResults(1, 2);
-        for(Results o:list) {
-            System.out.println(o);
-        }
+        
     }
 }

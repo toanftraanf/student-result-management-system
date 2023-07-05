@@ -84,13 +84,29 @@ public class ResultsDAO extends DBContext {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             stm.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public static void main(String[] args) {
-        ResultsDAO r = new ResultsDAO();
-        r.deleteResult(4);
+    public void updateResult(Float rs1, Float rs2, Float rs3, Float rs4 ,int id) {
+        String sql = "UPDATE [dbo].[results]\n"
+                + "   SET [result1] = ?\n"
+                + "      ,[result2] = ?\n"
+                + "      ,[result3] = ?\n"
+                + "      ,[result4] = ?\n"
+                + " WHERE id = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setFloat(1, rs1);
+            stm.setFloat(2, rs2);
+            stm.setFloat(3, rs3);
+            stm.setFloat(4, rs4);
+            stm.setInt(5, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
 }

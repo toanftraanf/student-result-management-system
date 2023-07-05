@@ -82,7 +82,54 @@
                                                     <th scope="row">${c.students.rollId}</th>
                                                     <td>${c.students.name}</td>
                                                     <td>
-                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Check student's infomation"><i class="fa fa-eye"></i></a>
+                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Check student's infomation" onclick="openInfoModal(${c.students.id})">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+
+                                                        <!-- Student's Information Modal Start -->
+                                                        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Student's Information</h5>
+                                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Roll ID: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.rollId}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Name: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.name}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Date of Birth: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.dob}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Gender: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.sex == 1 ? "Male" : "Female"}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Address: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.address}</div>
+                                                                        </div> 
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 ml-auto">Class: </div>
+                                                                            <div class="col-md-6 ml-auto">${c.students.classes.name}</div>
+                                                                        </div> 
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Student's Information Modal End -->
+
                                                     </td>
                                                     <td>
                                                         ${c.result1 == null ? "-":c.result1}
@@ -100,9 +147,60 @@
                                                         ${formattedTotal}
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-square btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Update" href="">
+                                                        <a class="btn btn-square btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Update" href="#" onclick="openUpdateModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
+
+                                                        <!-- Update Result Modal Start -->
+                                                        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Update Results</h5>
+                                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table border="0">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td><label for="studentId">Roll ID:</label></td>
+                                                                                    <td><input type="text"  name="rollId" value="${c.students.rollId}" readonly></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><label for="studentName">Student Name:</label></td>
+                                                                                    <td><input type="text" name="studentName" value="${c.students.name}" readonly></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><label for="progressTest">Progress Test Result:</label></td>
+                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs1" value="${c.result1}"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><label for="practicalExam">Practical Exam Result:</label></td>
+                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result1}"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><label for="workshop">Workshop Result:</label></td>
+                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result1}"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><label for="finalExam">Final Exam Result:</label></td>
+                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result1}"></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <a id="updateButton" class="btn btn-primary">Update</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Update Result Modal End -->
+
+
                                                         <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -157,6 +255,15 @@
                                                             function openDeleteModal(id, courseId, studentId) {
                                                                 $('#deleteModal').modal('show');
                                                                 $('#deleteButton').attr('href', 'delete-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
+                                                            }
+
+                                                            function openInfoModal(studentId) {
+                                                                $('#infoModal').modal('show');
+                                                            }
+
+                                                            function openUpdateModal(id, courseId, studentId) {
+                                                                $('#updateModal').modal('show');
+                                                                $('#updateButton').attr('href', 'update-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
                                                             }
 
                                                             function showPopupAlert(title, message) {
