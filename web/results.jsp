@@ -87,7 +87,7 @@
                                                         </a>
 
                                                         <!-- Student's Information Modal Start -->
-                                                        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="infoModal${c.students.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -152,7 +152,7 @@
                                                         </a>
 
                                                         <!-- Update Result Modal Start -->
-                                                        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="updateModal${c.students.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -161,40 +161,42 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <div class="modal-body">
-                                                                        <table border="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td><label for="studentId">Roll ID:</label></td>
-                                                                                    <td><input type="text"  name="rollId" value="${c.students.rollId}" readonly></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><label for="studentName">Student Name:</label></td>
-                                                                                    <td><input type="text" name="studentName" value="${c.students.name}" readonly></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><label for="progressTest">Progress Test Result:</label></td>
-                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs1" value="${c.result1}"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><label for="practicalExam">Practical Exam Result:</label></td>
-                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result1}"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><label for="workshop">Workshop Result:</label></td>
-                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result1}"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td><label for="finalExam">Final Exam Result:</label></td>
-                                                                                    <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result1}"></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <a id="updateButton" class="btn btn-primary">Update</a>
-                                                                    </div>
+                                                                    <form action="update-result?id=${c.id}&cid=${c.courses.id}&sid=${c.students.id}" method="POST">
+                                                                        <div class="modal-body">
+                                                                            <table border="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><label for="studentId">Roll ID:</label></td>
+                                                                                        <td><input type="text"  name="rollId" value="${c.students.rollId}" readonly></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><label for="studentName">Student Name:</label></td>
+                                                                                        <td><input type="text" name="studentName" value="${c.students.name}" readonly></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><label for="progressTest">Progress Test Result:</label></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs1" value="${c.result1}"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><label for="practicalExam">Practical Exam Result:</label></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result1}"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><label for="workshop">Workshop Result:</label></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result1}"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><label for="finalExam">Final Exam Result:</label></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result1}"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -204,9 +206,9 @@
                                                         <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
-
-                                                        <!-- Modal -->
+                                                        <!-- Delete Result Modal Start -->
                                                         <jsp:include page="components/delete_modal.jsp"></jsp:include>
+                                                            <!-- Delete Result Modal End -->
                                                         </td>
                                                     </tr>
                                             </c:forEach>
@@ -258,12 +260,11 @@
                                                             }
 
                                                             function openInfoModal(studentId) {
-                                                                $('#infoModal').modal('show');
+                                                                $('#infoModal' + studentId).modal('show');
                                                             }
 
                                                             function openUpdateModal(id, courseId, studentId) {
-                                                                $('#updateModal').modal('show');
-                                                                $('#updateButton').attr('href', 'update-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
+                                                                $('#updateModal' + studentId).modal('show');
                                                             }
 
                                                             function showPopupAlert(title, message) {

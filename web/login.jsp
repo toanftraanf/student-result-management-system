@@ -63,7 +63,7 @@
                             <!-- Login Form Start -->
                             <form action="login" method="POST">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" name="username" placeholder="name@example.com">
+                                    <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username">
                                     <label for="floatingInput">Username</label>
                                 </div>
                                 <div class="form-floating mb-4">

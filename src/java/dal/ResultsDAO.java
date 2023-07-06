@@ -8,6 +8,7 @@ import context.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,9 +25,17 @@ public class ResultsDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
-    List<Results> list = new ArrayList<>();
+
+    private void setNullableFloat(PreparedStatement stm, int index, Float value) throws SQLException {
+        if (value != null) {
+            stm.setFloat(index, value);
+        } else {
+            stm.setNull(index, Types.FLOAT);
+        }
+    }
 
     public List<Results> getResults(int courseId, int classId) {
+        List<Results> list = new ArrayList<>();
         StudentsDAO sdao = new StudentsDAO();
         CoursesDAO cdao = new CoursesDAO();
         try {
@@ -88,8 +97,8 @@ public class ResultsDAO extends DBContext {
             Logger.getLogger(ResultsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void updateResult(Float rs1, Float rs2, Float rs3, Float rs4 ,int id) {
+
+    public void updateResult(Float rs1, Float rs2, Float rs3, Float rs4, int id) {
         String sql = "UPDATE [dbo].[results]\n"
                 + "   SET [result1] = ?\n"
                 + "      ,[result2] = ?\n"
@@ -98,15 +107,15 @@ public class ResultsDAO extends DBContext {
                 + " WHERE id = ?";
         try {
             stm = connection.prepareStatement(sql);
-            stm.setFloat(1, rs1);
-            stm.setFloat(2, rs2);
-            stm.setFloat(3, rs3);
-            stm.setFloat(4, rs4);
+            setNullableFloat(stm, 1, rs1);
+            setNullableFloat(stm, 2, rs2);
+            setNullableFloat(stm, 3, rs3);
+            setNullableFloat(stm, 4, rs4);
             stm.setInt(5, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ResultsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

@@ -64,7 +64,6 @@ public class DeleteResultServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         int cid = Integer.parseInt(request.getParameter("cid"));
         int sid = Integer.parseInt(request.getParameter("sid"));
-        System.out.println(id + " " + cid + " " + sid);
         int a = tdao.getTeachingIdByCourseAndStudent(cid, sid);
         rdao.deleteResult(id);
         response.sendRedirect("results?id=" + a);
