@@ -179,15 +179,15 @@
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td><label for="practicalExam">Practical Exam Result:</label></td>
-                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result1}"></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result2}"></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td><label for="workshop">Workshop Result:</label></td>
-                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result1}"></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result3}"></td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td><label for="finalExam">Final Exam Result:</label></td>
-                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result1}"></td>
+                                                                                        <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result4}"></td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
