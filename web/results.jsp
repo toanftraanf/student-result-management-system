@@ -143,9 +143,9 @@
                                                     <td>
                                                         ${c.result4 == null ? "-":c.result4}
                                                     </td>
-                                                    <td style="color:${formattedTotal >= 5.0 ? 'green' : 'red'}">
+                                                    <th scope="row" style="color:${formattedTotal >= 5.0 ? 'green' : 'red'}">
                                                         ${formattedTotal}
-                                                    </td>
+                                                    </th>
                                                     <td>
                                                         <a class="btn btn-square btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Update" href="#" onclick="openUpdateModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-edit"></i>
@@ -212,6 +212,40 @@
                                                         </td>
                                                     </tr>
                                             </c:forEach>
+
+                                            <!-- Calculate average result for the whole class -->
+                                            <c:set var="totalStudents" value="${rdao.getResults(courseId, classId).size()}" />
+                                            <c:set var="totalRs1" value="0" />
+                                            <c:set var="totalRs2" value="0" />
+                                            <c:set var="totalRs3" value="0" />
+                                            <c:set var="totalRs4" value="0" />
+                                            <c:set var="totalAverage" value="0" />
+                                            <c:forEach items="${rdao.getResults(courseId, classId)}" var="c">
+                                                <c:set var="totalRs1" value="${totalRs1 + c.result1}" />
+                                                <c:set var="totalRs2" value="${totalRs2 + c.result2}" />
+                                                <c:set var="totalRs3" value="${totalRs3 + c.result3}" />
+                                                <c:set var="totalRs4" value="${totalRs4 + c.result4}" />
+                                                <c:set var="totalAverage" value="${totalAverage + c.result1*0.2+c.result2*0.2+c.result3*0.3+c.result4*0.3}" />
+                                            </c:forEach>
+                                            <c:set var="aveRs1" value="${totalRs1 / totalStudents}" />
+                                            <c:set var="aveRs2" value="${totalRs2 / totalStudents}" />
+                                            <c:set var="aveRs3" value="${totalRs3 / totalStudents}" />
+                                            <c:set var="aveRs4" value="${totalRs4 / totalStudents}" />
+                                            <c:set var="aveTotal" value="${totalAverage / totalStudents}" />
+                                            <fmt:formatNumber var="formattedAveRs1" value="${aveRs1}" pattern="#0.0" />
+                                            <fmt:formatNumber var="formattedAveRs2" value="${aveRs2}" pattern="#0.0" />
+                                            <fmt:formatNumber var="formattedAveRs3" value="${aveRs3}" pattern="#0.0" />
+                                            <fmt:formatNumber var="formattedAveRs4" value="${aveRs4}" pattern="#0.0" />
+                                            <fmt:formatNumber var="formattedAveTotal" value="${aveTotal}" pattern="#0.0" />
+                                            <tr class="table-primary">
+                                                <th colspan="3" scope="row">Average</th>
+                                                <td>${formattedAveRs1}</td>
+                                                <td>${formattedAveRs2}</td>
+                                                <td>${formattedAveRs3}</td>
+                                                <td>${formattedAveRs4}</td>
+                                                <th scope="row">${formattedAveTotal}</th>
+                                                <td></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
