@@ -65,7 +65,7 @@
                                 <a href="">Show All</a>
                             </div>
                             <div class="table-responsive">
-                                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <table id="table1" class="table text-start align-middle table-bordered table-hover mb-0">
                                     <thead>
                                         <tr class="text-dark">
                                             <th scope="col"><input class="form-check-input" type="checkbox"></th>
@@ -100,7 +100,7 @@
                                             <td><input class="form-check-input" type="checkbox"></td>
                                             <td>01 Jan 2045</td>
                                             <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
+                                            <td>Jhon Toan</td>
                                             <td>$123</td>
                                             <td>Paid</td>
                                             <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
@@ -159,6 +159,14 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script src="js/popup.js"></script>
+        <script src="https:////cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#table1').DataTable();
+            });
+        </script>
     </body>
 
 </html>

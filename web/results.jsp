@@ -60,7 +60,7 @@
                                 <div class="bg-light rounded h-100 p-4">
                                     <h6 class="mb-4">Responsive Table</h6>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" id="table1">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">RollID</th>
@@ -74,62 +74,17 @@
                                                     <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="table-body">
                                             <c:forEach items="${rdao.getResults(courseId, classId)}" var="c">
                                                 <c:set var="total" value="${c.result1*0.2+c.result2*0.2+c.result3*0.3+c.result4*0.3}"/>
                                                 <fmt:formatNumber var="formattedTotal" value="${total}" pattern="#0.0" />
                                                 <tr>
-                                                    <th scope="row">${c.students.rollId}</th>
+                                                    <td scope="row">${c.students.rollId}</td>
                                                     <td>${c.students.name}</td>
                                                     <td>
-                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Check student's infomation" onclick="openInfoModal(${c.students.id})">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#infoModal${c.students.id}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-
-                                                        <!-- Student's Information Modal Start -->
-                                                        <div class="modal fade" id="infoModal${c.students.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Student's Information</h5>
-                                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Roll ID: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.rollId}</div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Name: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.name}</div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Date of Birth: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.dob}</div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Gender: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.sex == 1 ? "Male" : "Female"}</div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Address: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.address}</div>
-                                                                        </div> 
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 ml-auto">Class: </div>
-                                                                            <div class="col-md-6 ml-auto">${c.students.classes.name}</div>
-                                                                        </div> 
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Student's Information Modal End -->
-
                                                     </td>
                                                     <td>
                                                         ${c.result1 == null ? "-":c.result1}
@@ -143,14 +98,13 @@
                                                     <td>
                                                         ${c.result4 == null ? "-":c.result4}
                                                     </td>
-                                                    <th scope="row" style="color:${formattedTotal >= 5.0 ? 'green' : 'red'}">
+                                                    <td scope="row" style="color:${formattedTotal >= 5.0 ? 'green' : 'red'}">
                                                         ${formattedTotal}
-                                                    </th>
+                                                    </td>
                                                     <td>
                                                         <a class="btn btn-square btn-outline-warning" data-toggle="tooltip" data-placement="top" title="Update" href="#" onclick="openUpdateModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-
                                                         <!-- Update Result Modal Start -->
                                                         <div class="modal fade" id="updateModal${c.students.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -201,8 +155,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- Update Result Modal End -->
-
-
+                                                        
                                                         <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -211,8 +164,53 @@
                                                             <!-- Delete Result Modal End -->
                                                         </td>
                                                     </tr>
-                                            </c:forEach>
 
+                                                    <!-- Student's Information Modal Start -->
+                                                <div class="modal fade" id="infoModal${c.students.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Student's Information</h5>
+                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Roll ID: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.rollId}</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Name: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.name}</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Date of Birth: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.dob}</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Gender: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.sex == 1 ? "Male" : "Female"}</div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Address: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.address}</div>
+                                                            </div> 
+                                                            <div class="row">
+                                                                <div class="col-md-6 ml-auto">Class: </div>
+                                                                <div class="col-md-6 ml-auto">${c.students.classes.name}</div>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Student's Information Modal End -->
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
                                             <!-- Calculate average result for the whole class -->
                                             <c:set var="totalStudents" value="${rdao.getResults(courseId, classId).size()}" />
                                             <c:set var="totalRs1" value="0" />
@@ -238,15 +236,15 @@
                                             <fmt:formatNumber var="formattedAveRs4" value="${aveRs4}" pattern="#0.0" />
                                             <fmt:formatNumber var="formattedAveTotal" value="${aveTotal}" pattern="#0.0" />
                                             <tr class="table-primary">
-                                                <th colspan="3" scope="row">Average</th>
-                                                <td>${formattedAveRs1}</td>
-                                                <td>${formattedAveRs2}</td>
-                                                <td>${formattedAveRs3}</td>
-                                                <td>${formattedAveRs4}</td>
+                                                <th colspan="3" scope="row">Average</td>
+                                                <th scope="row">${formattedAveRs1}</th>
+                                                <th scope="row">${formattedAveRs2}</th>
+                                                <th scope="row">${formattedAveRs3}</th>
+                                                <th scope="row">${formattedAveRs4}</th>
                                                 <th scope="row">${formattedAveTotal}</th>
                                                 <td></td>
                                             </tr>
-                                        </tbody>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -275,18 +273,20 @@
         <script src="lib/tempusdominus/js/moment.min.js"></script>
         <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script src="js/popup.js"></script>
-        <script>
-                                                            $(function () {
-                                                                $('[data-toggle="tooltip"]').tooltip();
-                                                            });
 
-                                                            $('#myModal').on('shown.bs.modal', function () {
-                                                                $('#myInput').trigger('focus');
-                                                            });
+        <!-- Page level plugins -->
+        <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+        <script src="js/mydatatables.js" type="text/javascript"></script>
+        
+        <!--Modal Javascripts-->
+        <script>
 
                                                             function openDeleteModal(id, courseId, studentId) {
                                                                 $('#deleteModal').modal('show');
@@ -308,5 +308,4 @@
                                                             }
         </script>
     </body>
-
 </html>
