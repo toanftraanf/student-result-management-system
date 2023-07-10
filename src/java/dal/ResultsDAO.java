@@ -118,4 +118,49 @@ public class ResultsDAO extends DBContext {
         }
     }
 
+    public List<Results> getResultsByStudentId(int studentId) {
+        List<Results> list = new ArrayList<>();
+        StudentsDAO sdao = new StudentsDAO();
+        CoursesDAO cdao = new CoursesDAO();
+        try {
+            String strSelect = "SELECT [id]\n"
+                    + "      ,[result1]\n"
+                    + "      ,[result2]\n"
+                    + "      ,[result3]\n"
+                    + "      ,[result4]\n"
+                    + "      ,[studentId]\n"
+                    + "      ,[courseid]\n"
+                    + "  FROM [dbo].[results] \n"
+                    + "  where [studentId] = ?";
+            stm = connection.prepareStatement(strSelect);
+            stm.setInt(1, studentId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Results em = new Results();
+                em.setId(rs.getInt("id"));
+
+                Float result1 = rs.getObject("result1") != null ? rs.getFloat("result1") : null;
+                em.setResult1(result1);
+
+                Float result2 = rs.getObject("result2") != null ? rs.getFloat("result2") : null;
+                em.setResult2(result2);
+
+                Float result3 = rs.getObject("result3") != null ? rs.getFloat("result3") : null;
+                em.setResult3(result3);
+
+                Float result4 = rs.getObject("result4") != null ? rs.getFloat("result4") : null;
+                em.setResult4(result4);
+
+                Students s = sdao.getStudentById(rs.getInt("studentId"));
+                em.setStudents(s);
+                Courses c = cdao.getCourseById(rs.getInt("courseId"));
+                em.setCourses(c);
+                list.add(em);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
 }

@@ -15,6 +15,9 @@ import model.Results;
 public class resultDAO {
     public static void main(String[] args) {
         ResultsDAO r = new ResultsDAO();
-        
+        List<Results> list = r.getResultsByStudentId(1);
+        for(Results o:list) {
+            System.out.println(o);
+        }
     }
 }
