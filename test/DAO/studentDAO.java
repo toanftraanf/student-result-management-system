@@ -13,6 +13,6 @@ import dal.StudentsDAO;
 public class studentDAO {
     public static void main(String[] args) {
         StudentsDAO d = new StudentsDAO();
-        System.out.println(d.getStudentById(1));
+        System.out.println(d.getStudentByRollId("he170909"));
     }
 }

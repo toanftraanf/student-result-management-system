@@ -46,4 +46,28 @@ public class StudentsDAO extends DBContext {
         }
         return null;
     }
+    
+    public Students getStudentByRollId(String rollId) {
+        ClassesDAO cdao = new ClassesDAO();
+        String sql = "SELECT *\n"
+                + "  FROM [dbo].[students]\n"
+                + "  where [rollId] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, rollId.toUpperCase());
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Students(rs.getInt("id")
+                        , rs.getString("rollId")
+                        , rs.getString("name")
+                        , rs.getDate("dob")
+                        , rs.getInt("sex")
+                        , rs.getString("address")
+                        ,cdao.getClassById(rs.getInt("classId")) );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

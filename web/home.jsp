@@ -44,36 +44,26 @@
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
             <jsp:include page="/components/spinner.jsp"></jsp:include>
-                <!-- Spinner End -->
+            <!-- Spinner End -->
 
 
-                <!-- Sign In Start -->
-                <div class="container-fluid">
-                    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <a href="index.html" class="">
-                                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SRMS</h3>
-                                    </a>
-                                    <h3>Mark Report</h3>
-                                </div>
-
-                                <!-- Login failed alert -->
-                                <!--                            <c:if test="${not empty param.error}">
-                                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                                <i class="fa fa-exclamation-circle me-2"></i>${param.error}
-                                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                            </div>
-                            </c:if>-->
-
-                            <!-- Login Form Start -->
+            <!-- Mark Report Start -->
+            <div class="container-fluid">
+                <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                        <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <a href="index.html" class="">
+                                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SRMS</h3>
+                                </a>
+                                <h3>Mark Report</h3>
+                            </div>
+                            <!-- Roll ID Input Form Start -->
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" name="rollId" placeholder="rollId">
                                 <label for="floatingInput">Roll ID</label>
                             </div>
-
-                            <button type="submit" id="submit" class="btn btn-primary py-3 w-100 mb-4" data-bs-toggle="modal" data-bs-target="#reportModal">Submit</button>
+                            <button type="submit" id="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="submitBtn()">Submit</button>
 
                             <!--Mark Report Modal Start-->
                             <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,13 +88,13 @@
                             </div>
                             <!--Mark Report Modal End-->
 
-                            <!-- Login Form End -->
+                            <!-- Roll ID Input Form End -->
                             <p class="text-center mb-0">Teacher? <a href="login">Sign In</a></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Sign In End -->
+            <!-- Mark Report End -->
         </div>
 
         <!-- JavaScript Libraries -->
@@ -120,59 +110,20 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-        <script type="text/javascript">
-            $("#submit").click(function () {
-                var rollId = $("#floatingInput").val();
-                var results = ${rdao.getResultsByStudentRollId(rollId)}; // Assuming this returns an array of results
-                console.log(rollId);
-                console.log(results);
-                var str = '<div class="d-flex align-items-start">' +
-                        '<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
-
-                results.forEach(function (c) {
-                    str += '<button class="nav-link" id="v-pills-tab-' + c.courses.id + '" data-bs-toggle="pill" data-bs-target="#v-pills-' + c.courses.id + '" type="button" role="tab" aria-controls="v-pills-' + c.courses.id + '" aria-selected="false">' + c.courses.rollId + '</button>';
-                });
-
-                str += '</div>' +
-                        '<div class="tab-content" id="v-pills-tabContent">';
-
-                results.forEach(function (c) {
-                    str += '<div class="tab-pane fade" id="v-pills-' + c.courses.id + '" role="tabpanel" aria-labelledby="v-pills-tab-' + c.courses.id + '">' +
-                            '<table border="0">' +
-                            '<tbody>' +
-                            '<tr>' +
-                            '<td><label for="studentId">Roll ID:</label></td>' +
-                            '<td><input type="text" name="rollId" value="' + c.students.rollId + '" readonly></td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td><label for="studentName">Student Name:</label></td>' +
-                            '<td><input type="text" name="studentName" value="' + c.students.name + '" readonly></td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td><label for="progressTest">Progress Test Result:</label></td>' +
-                            '<td><input type="number" min="0.0" max="10.0" step="0.1" name="rs1" value="' + c.result1 + '"></td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td><label for="practicalExam">Practical Exam Result:</label></td>' +
-                            '<td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="' + c.result2 + '"></td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td><label for="workshop">Workshop Result:</label></td>' +
-                            '<td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="' + c.result3 + '"></td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td><label for="finalExam">Final Exam Result:</label></td>' +
-                            '<td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="' + c.result4 + '"></td>' +
-                            '</tr>' +
-                            '</tbody>' +
-                            '</table>' +
-                            '</div>';
-                });
-
-                str += '</div>' +
-                        '</div>';
-                document.getElementById("body").innerHTML = str;
-            });
+        <script>
+                                function submitBtn() {
+                                    var rollId = $("#floatingInput").val();
+                                    console.log(rollId);
+                                    $.ajax({
+                                        url: 'mark-report',
+                                        data: {'rollId': rollId},
+                                        type: "POST",
+                                        success: function (text) {
+                                            document.getElementById("body").innerHTML = text;
+                                            $('#reportModal').modal('show'); // Open the modal
+                                        }
+                                    });
+                                }
         </script>
     </body>
 
