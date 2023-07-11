@@ -118,22 +118,17 @@ public class ResultsDAO extends DBContext {
         }
     }
 
-    public List<Results> getResultsByStudentId(int studentId) {
+    public List<Results> getResultsByStudentRollId(String rollId) {
         List<Results> list = new ArrayList<>();
         StudentsDAO sdao = new StudentsDAO();
         CoursesDAO cdao = new CoursesDAO();
         try {
-            String strSelect = "SELECT [id]\n"
-                    + "      ,[result1]\n"
-                    + "      ,[result2]\n"
-                    + "      ,[result3]\n"
-                    + "      ,[result4]\n"
-                    + "      ,[studentId]\n"
-                    + "      ,[courseid]\n"
-                    + "  FROM [dbo].[results] \n"
-                    + "  where [studentId] = ?";
+            String strSelect = "SELECT        dbo.results.*\n"
+                    + "FROM            dbo.results INNER JOIN\n"
+                    + "                         dbo.students ON dbo.results.studentId = dbo.students.id\n"
+                    + "WHERE dbo.students.rollId = ?";
             stm = connection.prepareStatement(strSelect);
-            stm.setInt(1, studentId);
+            stm.setString(1, rollId);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Results em = new Results();

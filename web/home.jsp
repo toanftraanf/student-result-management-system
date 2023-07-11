@@ -87,49 +87,7 @@
                                         </div>
                                         <form action="" method="POST">
                                             <div class="modal-body" id="body">
-<!--                                                <div class="d-flex align-items-start">
-                                                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                        <c:forEach items="${rdao.getResultsByStudentId(1)}" var="c">
-                                                            <button class="nav-link" id="v-pills-tab-${c.courses.id}" data-bs-toggle="pill"
-                                                                    data-bs-target="#v-pills-${c.courses.id}" type="button" role="tab"
-                                                                    aria-controls="v-pills-${c.courses.id}" aria-selected="false">${c.courses.rollId}</button>
-                                                        </c:forEach>
-                                                    </div>
-                                                    <div class="tab-content" id="v-pills-tabContent">
-                                                        <c:forEach items="${rdao.getResultsByStudentId(1)}" var="c">
-                                                            <div class="tab-pane fade" id="v-pills-${c.courses.id}" role="tabpanel" aria-labelledby="v-pills-tab-${c.courses.id}">
-                                                                <table border="0">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td><label for="studentId">Roll ID:</label></td>
-                                                                            <td><input type="text" name="rollId" value="${c.students.rollId}" readonly></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label for="studentName">Student Name:</label></td>
-                                                                            <td><input type="text" name="studentName" value="${c.students.name}" readonly></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label for="progressTest">Progress Test Result:</label></td>
-                                                                            <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs1" value="${c.result1}"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label for="practicalExam">Practical Exam Result:</label></td>
-                                                                            <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs2" value="${c.result2}"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label for="workshop">Workshop Result:</label></td>
-                                                                            <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs3" value="${c.result3}"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><label for="finalExam">Final Exam Result:</label></td>
-                                                                            <td><input type="number" min="0.0" max="10.0" step="0.1" name="rs4" value="${c.result4}"></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>-->
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -165,8 +123,9 @@
         <script type="text/javascript">
             $("#submit").click(function () {
                 var rollId = $("#floatingInput").val();
-                var results = ${rdao.getResultsByStudentId(rollId)}; // Assuming this returns an array of results
+                var results = ${rdao.getResultsByStudentRollId(rollId)}; // Assuming this returns an array of results
                 console.log(rollId);
+                console.log(results);
                 var str = '<div class="d-flex align-items-start">' +
                         '<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">';
 
