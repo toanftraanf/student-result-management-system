@@ -42,7 +42,7 @@ public class AccountsDAO extends DBContext {
         }
         return false;
     }
-    
+
     //get role of account, if valid returns role number, otherwise returns -1
     public int getRole(String username) {
         String sql = "SELECT role FROM accounts WHERE username = ?";
@@ -50,27 +50,44 @@ public class AccountsDAO extends DBContext {
             stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             rs = stm.executeQuery();
-                while(rs.next()) {
-                    return rs.getInt("role");
-                }
-        } catch(SQLException ex) {
+            while (rs.next()) {
+                return rs.getInt("role");
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(AccountsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }
-    
+
     public int getTeacherId(String username) {
         String sql = "SELECT teacherId FROM accounts WHERE username = ?";
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             rs = stm.executeQuery();
-                while(rs.next()) {
-                    return rs.getInt("teacherId");
-                }
-        } catch(SQLException ex) {
+            while (rs.next()) {
+                return rs.getInt("teacherId");
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(AccountsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
+    }
+
+    public Accounts getAccounts(String username, String password) {
+        String sql = "SELECT * FROM accounts WHERE username = ? AND password = ?";
+        TeachersDAO tdao = new TeachersDAO();
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setString(2, password);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Accounts(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getInt("role"), tdao.getTeacherById(rs.getInt("teacherId")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.student;
 
 import dal.ResultsDAO;
 import dal.StudentsDAO;
@@ -76,19 +76,33 @@ public class MarkReportServlet extends HttpServlet {
                 List<Results> list = rdao.getResultsByStudentRollId(rollId);
                 out.println("<div class='d-flex align-items-start'>"
                         + "<div class='nav flex-column nav-pills me-3' id='v-pills-tab' role='tablist' aria-orientation='vertical'>");
-                for (Results c : list) {
-                    out.println("<button class='nav-link' id='v-pills-tab-" + c.getCourses().getId()
-                            + "' data-bs-toggle='pill' data-bs-target='#v-pills-" + c.getCourses().getId()
-                            + "' type='button' role='tab' aria-controls='v-pills-" + c.getCourses().getId()
-                            + "' aria-selected='false'>" + c.getCourses().getRollId()
+                int index = 0;
+                for (Results d : list) {
+                    String courseId = "course-" + d.getCourses().getId();
+                    String tabId = "tab-" + d.getCourses().getId();
+                    String isActive = (index == 0) ? "active" : "";
+                    out.println("<button class='nav-link " + isActive + "' id='" + tabId
+                            + "-tab' data-bs-toggle='pill' data-bs-target='#" + tabId
+                            + "' type='button' role='tab' aria-controls='" + tabId
+                            + "' aria-selected='false'>" + d.getCourses().getRollId()
                             + "</button>");
+                    index++;
                 }
                 out.println("</div>"
                         + "<div class='tab-content' id='v-pills-tabContent'>");
+                index = 0;
                 for (Results c : list) {
-                    Double total = c.getResult1()*0.2+c.getResult2()*0.2+c.getResult3()*0.3+c.getResult4()*0.3;
-                    out.println("<div class='tab-pane fade' id='v-pills-" + c.getCourses().getId() + "' role='tabpanel' aria-labelledby='v-pills-tab-" + c.getCourses().getId() + "'>"
-                            + "<table border='0'>"
+                    String courseId = "course-" + c.getCourses().getId();
+                    String tabId = "tab-" + c.getCourses().getId();
+                    String isActive = (index == 0) ? "show active" : "";  // Add "show active" classes here
+                    Double result1 = (c.getResult1() != null) ? c.getResult1() : 0.0;
+                    Double result2 = (c.getResult2() != null) ? c.getResult2() : 0.0;
+                    Double result3 = (c.getResult3() != null) ? c.getResult3() : 0.0;
+                    Double result4 = (c.getResult4() != null) ? c.getResult4() : 0.0;
+                    Double total = result1 * 0.2 + result2 * 0.2 + result3 * 0.3 + result4 * 0.3;
+
+                    out.println("<div class='tab-pane fade " + isActive + "' id='" + tabId + "' role='tabpanel' aria-labelledby='" + tabId + "-tab'>"
+                            + "<table class='table'>"
                             + "<tbody>"
                             + "<tr>"
                             + "<td><label for='studentId'>Roll ID:</label></td>"
@@ -121,13 +135,14 @@ public class MarkReportServlet extends HttpServlet {
                             + "</tbody>"
                             + "</table>"
                             + "</div>");
+                    index++;
                 }
                 out.println("</div>"
                         + "</div>");
             } else {
                 out.println("<div class=\"alert alert-danger\" role=\"alert\">\n"
-                        + "                                Roll ID does not exist!\n"
-                        + "                            </div>");
+                        + "Roll ID does not exist!\n"
+                        + "</div>");
             }
         }
     }

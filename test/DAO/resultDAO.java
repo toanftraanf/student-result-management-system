@@ -13,10 +13,14 @@ import model.Results;
  * @author trant
  */
 public class resultDAO {
+
     public static void main(String[] args) {
         ResultsDAO r = new ResultsDAO();
         List<Results> list = r.getResultsByStudentRollId("HE170909");
-        for(Results o:list) {
+        for (Results o : list) {
+            System.out.println(o);
+        }
+        for (Results o : list) {
             System.out.println(o);
         }
     }
