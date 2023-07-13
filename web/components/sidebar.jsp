@@ -28,7 +28,7 @@
                         <h6 class="mb-0"><%= session.getAttribute("username") %></h6>
                         <span>
                             <c:if test="${sessionScope.role == 0}">
-                                Teacher
+                                Instructor
                             </c:if>
                             <c:if test="${sessionScope.role != 0}">
                                 Admin
