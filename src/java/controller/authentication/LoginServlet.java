@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 session.setAttribute("role", adao.getRole(username)); // Assuming you have a getRole method in your AccountsDAO
                 session.setAttribute("loginSuccess", true); // Set login success attribute
-                response.sendRedirect("dashboard");
+                response.sendRedirect("home");
             } else {
                 // Invalid credentials, redirect back to the login page with an error message
                 response.sendRedirect("login.jsp?error=Invalid username or password.");

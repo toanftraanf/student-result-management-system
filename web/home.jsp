@@ -53,7 +53,7 @@
                     <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                         <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                                <a href="index.html" class="">
+                                <a href="#" class="">
                                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SRMS</h3>
                                 </a>
                                 <h3>Mark Report</h3>
@@ -96,6 +96,7 @@
             </div>
             <!-- Mark Report End -->
         </div>
+            <jsp:include page="components/footer.jsp"></jsp:include>
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

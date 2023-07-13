@@ -24,8 +24,8 @@ import model.Teaching;
  *
  * @author trant
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
-public class DashboardServlet extends BasedRequiredAuthenticationController {
+@WebServlet(name = "DashboardServlet", urlPatterns = {"/home"})
+public class HomeServlet extends BasedRequiredAuthenticationController {
     @Override
     public String getServletInfo() {
         return "Short description";
