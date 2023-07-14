@@ -21,6 +21,7 @@ import model.Accounts;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,7 +61,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("teacherId", teacherId);
                 session.setAttribute("username", username);
                 session.setAttribute("role", adao.getRole(username)); // Assuming you have a getRole method in your AccountsDAO
-                session.setAttribute("loginSuccess", true); // Set login success attribute
+                // Assuming the login is successful
+                String successMessage = "Login successful!";
+                request.getSession().setAttribute("successMessage", successMessage);
                 response.sendRedirect("home");
             } else {
                 // Invalid credentials, redirect back to the login page with an error message

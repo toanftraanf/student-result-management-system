@@ -44,59 +44,62 @@
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
             <jsp:include page="/components/spinner.jsp"></jsp:include>
-            <!-- Spinner End -->
+                <!-- Spinner End -->
 
+                <!-- Mark Report Start -->
+                <div class="container-fluid">
+                    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <a href="#" class="">
+                                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SRMS</h3>
+                                    </a>
+                                    <h3>Mark Report</h3>
+                                </div>
+                                <!-- Roll ID Input Form Start -->
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" name="rollId" placeholder="rollId">
+                                    <label for="floatingInput">Roll ID</label>
+                                </div>
+                                <button type="submit" id="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="submitBtn()">Submit</button>
 
-            <!-- Mark Report Start -->
-            <div class="container-fluid">
-                <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                        <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <a href="#" class="">
-                                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SRMS</h3>
-                                </a>
-                                <h3>Mark Report</h3>
-                            </div>
-                            <!-- Roll ID Input Form Start -->
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="rollId" placeholder="rollId">
-                                <label for="floatingInput">Roll ID</label>
-                            </div>
-                            <button type="submit" id="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="submitBtn()">Submit</button>
+                                <!--Mark Report Modal Start-->
+                                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Mark Report</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="" method="POST">
+                                                <div class="modal-body" id="body">
 
-                            <!--Mark Report Modal Start-->
-                            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Mark Report</h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <form action="" method="POST">
-                                            <div class="modal-body" id="body">
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
-                            </div>
-                            <!--Mark Report Modal End-->
+                                <!--Mark Report Modal End-->
 
-                            <!-- Roll ID Input Form End -->
-                            <p class="text-center mb-0">Teacher? <a href="login">Sign In</a></p>
+                                <!-- Roll ID Input Form End -->
+                                <p class="text-center mb-0">Teacher? <a href="login">Sign In</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- Mark Report End -->
             </div>
-            <!-- Mark Report End -->
-        </div>
-            <jsp:include page="components/footer.jsp"></jsp:include>
+
+            <!--Footer Start-->
+        <jsp:include page="components/footer.jsp"></jsp:include>
+        <!--Footer End-->
+
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
