@@ -72,7 +72,7 @@
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
                             </form>
                             <!-- Login Form End -->
-                            <p class="text-center mb-0">Students? <a href="home.jsp">Mark Report</a></p>
+                            <p class="text-center mb-0">Students? <a href="mark-report.jsp">Mark Report</a></p>
                         </div>
                     </div>
                 </div>

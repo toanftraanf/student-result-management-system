@@ -43,8 +43,8 @@
                         <h1 class="display-1 fw-bold">404</h1>
                         <h1 class="mb-4">Page Not Found</h1>
                         <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website!
-                            Maybe go to our home page?</p>
-                        <a class="btn btn-primary rounded-pill py-3 px-5" href="home.jsp">Go Back To Home</a>
+                            Maybe go to our default page?</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5" href="mark-report.jsp">Go Back To Default Page</a>
                     </div>
                 </div>
             </div>

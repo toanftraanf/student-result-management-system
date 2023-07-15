@@ -9,7 +9,6 @@ import dal.AccountsDAO;
 import dal.CoursesDAO;
 import dal.TeachingDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ import model.Teaching;
  *
  * @author trant
  */
-@WebServlet(name = "DashboardServlet", urlPatterns = {"/home"})
+@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
 public class HomeServlet extends BasedRequiredAuthenticationController {
     @Override
     public String getServletInfo() {
@@ -43,12 +42,12 @@ public class HomeServlet extends BasedRequiredAuthenticationController {
 
         HttpSession session = request.getSession();
         // If the logged-in user is a teacher, retrieve the list of courses they teach
-        int teacherId = (int) session.getAttribute("teacherId"); // Assuming you have a method to retrieve the teacher ID
-        List<Courses> courses = cdao.getCoursesByTeacherId(teacherId);
+        Accounts a = (Accounts) session.getAttribute("account"); // Assuming you have a method to retrieve the teacher ID
+        List<Courses> courses = cdao.getCoursesByTeacherId(a.getTeachers().getId());
         //Set sidebar's attributes
         request.setAttribute("courses", courses);
         List<Teaching> teaching = tdao.getAllTeaching();
         request.setAttribute("teaching", teaching);
-        request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 }

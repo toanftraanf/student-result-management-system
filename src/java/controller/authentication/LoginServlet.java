@@ -55,15 +55,8 @@ public class LoginServlet extends HttpServlet {
             if (adao.checkLogin(username, password)) {
                 // Credentials are valid, create a session and save the account information
                 HttpSession session = request.getSession();
-                int teacherId = adao.getTeacherId(username);
                 Accounts account = adao.getAccounts(username, password);
                 session.setAttribute("account", account);
-                session.setAttribute("teacherId", teacherId);
-                session.setAttribute("username", username);
-                session.setAttribute("role", adao.getRole(username)); // Assuming you have a getRole method in your AccountsDAO
-                // Assuming the login is successful
-                String successMessage = "Login successful!";
-                request.getSession().setAttribute("successMessage", successMessage);
                 response.sendRedirect("home");
             } else {
                 // Invalid credentials, redirect back to the login page with an error message
