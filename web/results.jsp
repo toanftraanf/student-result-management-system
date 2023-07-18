@@ -111,7 +111,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">Update Results</h5>
-                                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
@@ -155,8 +155,8 @@
                                                             </div>
                                                         </div>
                                                         <!-- Update Result Modal End -->
-                                                        
-                                                        <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteModal(${c.id}, ${c.courses.id}, ${c.students.id})">
+
+                                                        <a class="btn btn-square btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#" onclick="openDeleteResultModal(${c.id}, ${c.courses.id}, ${c.students.id})">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                         <!-- Delete Result Modal Start -->
@@ -171,7 +171,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Student's Information</h5>
-                                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
@@ -284,28 +284,6 @@
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <script src="js/mydatatables.js" type="text/javascript"></script>
-        
-        <!--Modal Javascripts-->
-        <script>
 
-                                                            function openDeleteModal(id, courseId, studentId) {
-                                                                $('#deleteModal').modal('show');
-                                                                $('#deleteButton').attr('href', 'delete-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
-                                                            }
-
-                                                            function openInfoModal(studentId) {
-                                                                $('#infoModal' + studentId).modal('show');
-                                                            }
-
-                                                            function openUpdateModal(id, courseId, studentId) {
-                                                                $('#updateModal' + studentId).modal('show');
-                                                            }
-
-                                                            function showPopupAlert(title, message) {
-                                                                document.getElementById('popupTitle').textContent = title;
-                                                                document.getElementById('popupBody').textContent = message;
-                                                                $('.toast').toast('show');
-                                                            }
-        </script>
     </body>
 </html>

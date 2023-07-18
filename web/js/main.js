@@ -10,8 +10,8 @@
         }, 1);
     };
     spinner();
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -55,7 +55,7 @@
         items: 1,
         dots: true,
         loop: true,
-        nav : false
+        nav: false
     });
 
 
@@ -81,7 +81,7 @@
                     backgroundColor: "rgba(0, 156, 255, .3)"
                 }
             ]
-            },
+        },
         options: {
             responsive: true
         }
@@ -107,12 +107,12 @@
                     fill: true
                 }
             ]
-            },
+        },
         options: {
             responsive: true
         }
     });
-    
+
 
 
     // Single Line Chart
@@ -122,11 +122,11 @@
         data: {
             labels: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
             datasets: [{
-                label: "Salse",
-                fill: false,
-                backgroundColor: "rgba(0, 156, 255, .3)",
-                data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
-            }]
+                    label: "Salse",
+                    fill: false,
+                    backgroundColor: "rgba(0, 156, 255, .3)",
+                    data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
+                }]
         },
         options: {
             responsive: true
@@ -141,15 +141,15 @@
         data: {
             labels: ["Italy", "France", "Spain", "USA", "Argentina"],
             datasets: [{
-                backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)",
-                    "rgba(0, 156, 255, .5)",
-                    "rgba(0, 156, 255, .4)",
-                    "rgba(0, 156, 255, .3)"
-                ],
-                data: [55, 49, 44, 24, 15]
-            }]
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: [55, 49, 44, 24, 15]
+                }]
         },
         options: {
             responsive: true
@@ -164,15 +164,15 @@
         data: {
             labels: ["Italy", "France", "Spain", "USA", "Argentina"],
             datasets: [{
-                backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)",
-                    "rgba(0, 156, 255, .5)",
-                    "rgba(0, 156, 255, .4)",
-                    "rgba(0, 156, 255, .3)"
-                ],
-                data: [55, 49, 44, 24, 15]
-            }]
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: [55, 49, 44, 24, 15]
+                }]
         },
         options: {
             responsive: true
@@ -187,21 +187,54 @@
         data: {
             labels: ["Italy", "France", "Spain", "USA", "Argentina"],
             datasets: [{
-                backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)",
-                    "rgba(0, 156, 255, .5)",
-                    "rgba(0, 156, 255, .4)",
-                    "rgba(0, 156, 255, .3)"
-                ],
-                data: [55, 49, 44, 24, 15]
-            }]
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: [55, 49, 44, 24, 15]
+                }]
         },
         options: {
             responsive: true
         }
     });
 
-    
+
 })(jQuery);
+
+function openDeleteResultModal(id, courseId, studentId) {
+    $('#deleteModal').modal('show');
+    document.getElementById("body").innerHTML = 'Are you sure you want to delete this student\'s grades?';
+    $('#deleteButton').attr('href', 'delete-result?id=' + id + '&cid=' + courseId + '&sid=' + studentId);
+}
+
+function openInfoModal(studentId) {
+    $('#infoModal' + studentId).modal('show');
+}
+
+function openUpdateModal(id, courseId, studentId) {
+    $('#updateModal' + studentId).modal('show');
+}
+
+function openDeleteModalAdmin(id, role) {
+    switch (role) {
+        case 'classes' :
+            $('#deleteModal').modal('show');
+            document.getElementById('body').innerHTML = 'Are you sure you want to delete this class?';
+            $('#deleteButton').attr('href', 'delete-class?id=' + id);
+            break;
+        case 'courses':
+            $('#deleteModal').modal('show');
+            document.getElementById('body').innerHTML = 'Are you sure you want to delete this course?';
+            $('#deleteButton').attr('href', 'delete-course?id=' + id);
+            break;
+    }
+
+
+}
+
+
 

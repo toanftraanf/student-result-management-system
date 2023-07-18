@@ -15,6 +15,10 @@ import model.Classes;
 public class classTest {
     public static void main(String[] args) {
         ClassesDAO c = new ClassesDAO();
-        System.out.println(c.getClassById(1));
+//        List<Classes> list = c.getAllClasses();
+//        for(Classes o : list) {
+//            System.out.println(o);
+//        }
+    c.deleteClass(7);
     }
 }

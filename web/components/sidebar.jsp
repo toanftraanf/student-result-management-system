@@ -27,13 +27,26 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
+                        <%
+                            if(a.getRole() == 0) {
+                        %>
                         <h6 class="mb-0"><%= a.getTeachers().getName() %></h6>
                         <span>
                             <%= (a.getRole() == 0) ? "Instructor" : "Admin" %>
                         </span>
+                        <%
+                            } else {
+                        %>
+                        <h6 class="mb-0">Admin</h6>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
+                    <%
+                        if(a.getRole() == 0) {
+                    %>
                     <c:set var="teacherId" scope="session" value='<%= a.getTeachers().getId() %>'></c:set>
                     <c:forEach items="${dao.getCoursesByTeacherId(teacherId)}" var="c">
                         <div class="nav-item dropdown">
@@ -45,6 +58,17 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <%
+                        } else {
+                    %>
+                    <a href="dashboard" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="manage-courses" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Manage Courses</a>
+                    <a href="manage-classes" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Manage Classes</a>
+                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Manage Students</a>
+                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Manage Teachers</a>
+                    <%
+                        }
+                    %>
                 </div>
             </nav>
         </div>

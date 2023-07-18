@@ -35,9 +35,9 @@ public class TeachingDAO extends DBContext {
             rs = stm.executeQuery();
             while (rs.next()) {
                 Teaching em = new Teaching(rs.getInt(1),
-                         tdao.getTeacherById(rs.getInt(2)),
-                         cdao.getCourseById(rs.getInt(3)),
-                         classDao.getClassById(rs.getInt(4)));
+                        tdao.getTeacherById(rs.getInt(2)),
+                        cdao.getCourseById(rs.getInt(3)),
+                        classDao.getClassById(rs.getInt(4)));
                 list.add(em);
             }
         } catch (SQLException ex) {
@@ -56,10 +56,10 @@ public class TeachingDAO extends DBContext {
             rs = stm.executeQuery();
             while (rs.next()) {
                 Teaching em = new Teaching(
-                         rs.getInt(1),
-                         tdao.getTeacherById(rs.getInt(2)),
-                         cdao.getCourseById(rs.getInt(3)),
-                         classDao.getClassById(rs.getInt(4))
+                        rs.getInt(1),
+                        tdao.getTeacherById(rs.getInt(2)),
+                        cdao.getCourseById(rs.getInt(3)),
+                        classDao.getClassById(rs.getInt(4))
                 );
                 list.add(em);
             }
@@ -68,7 +68,7 @@ public class TeachingDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getTeachingId(int teacherId, int courseId, int classId) {
         String sql = "SELECT id FROM teaching WHERE teacherId = ? AND courseId = ? AND classId = ?";
         try {
@@ -139,8 +139,25 @@ public class TeachingDAO extends DBContext {
         return -1;
     }
 
+    public int getCourseAmountByClass(int classId) {
+        String sql = "SELECT COUNT(*) \n"
+                + "FROM [dbo].[teaching]\n"
+                + "WHERE [classId] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, classId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeachingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         TeachingDAO d = new TeachingDAO();
-        System.out.println(d.getTeachingByCourseAndTeacher(1, 1));
+        System.out.println(d.getCourseAmountByClass(1));
     }
 }

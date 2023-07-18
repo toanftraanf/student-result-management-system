@@ -23,8 +23,7 @@ public class CoursesDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
-    List<Courses> list = new ArrayList<>();
-    
+
     public Courses getCourseById(int id) {
         String sql = "SELECT *\n"
                 + "  FROM [dbo].[courses]\n"
@@ -43,6 +42,7 @@ public class CoursesDAO extends DBContext {
     }
 
     public List<Courses> getCoursesByTeacherId(int id) {
+        List<Courses> list = new ArrayList<>();
         String sql = "SELECT DISTINCT c.*\n"
                 + "  FROM [dbo].[teaching] t join [dbo].[courses] c\n"
                 + "  ON  t.courseId = c.id\n"
@@ -61,17 +61,75 @@ public class CoursesDAO extends DBContext {
         }
         return list;
     }
+
+    public List<Courses> getAllCourses() {
+        List<Courses> list = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "  FROM [dbo].[courses]";
+        try {
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Courses em = new Courses(rs.getInt("id"), rs.getString("rollId"), rs.getString("name"));
+                list.add(em);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public void deleteCourse(int courseId) {
+        String sql = "DELETE FROM [dbo].[courses]\n"
+                + "      WHERE [id] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, courseId);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void addCourse(String rollId, String courseName) {
+        String sql = "INSERT INTO [dbo].[courses]\n"
+                + "           ([rollId], [name])\n"
+                + "     VALUES\n"
+                + "           (?, ?)";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, rollId);
+            stm.setString(2, courseName);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateCouse(String rollId, String name, int id) {
+        String sql = "UPDATE [dbo].[courses]\n"
+                + "   SET [rollId] = ?\n"
+                + "      ,[name] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, rollId);
+            stm.setString(2, name);
+            stm.setInt(3, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CoursesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void main(String[] args) {
         CoursesDAO c = new CoursesDAO();
         TeachingDAO t = new TeachingDAO();
-        List<Courses> list = c.getCoursesByTeacherId(1);
-        
-        for(Courses o:list) {
-            System.out.println(o.getId()+" "+1);
-            List<Teaching> teachList = t.getTeachingByCourseAndTeacher(o.getId(), 1);
-            for(Teaching a:teachList) {
-                System.out.println(a);
-            }
-        }
+//        List<Courses> list = c.getAllCourses();
+//
+//        for (Courses o : list) {
+//            System.out.println(o);
+//        }
+        c.addCourse("WED201", "Web Design");
     }
 }

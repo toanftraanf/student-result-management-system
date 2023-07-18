@@ -63,6 +63,7 @@
                                     <label for="floatingInput">Roll ID</label>
                                 </div>
                                 <button type="submit" id="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="submitBtn()">Submit</button>
+                                <!-- Roll ID Input Form End -->
 
                                 <!--Mark Report Modal Start-->
                                 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,7 +71,7 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Mark Report</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -87,7 +88,6 @@
                                 </div>
                                 <!--Mark Report Modal End-->
 
-                                <!-- Roll ID Input Form End -->
                                 <p class="text-center mb-0">Teacher? <a href="login">Sign In</a></p>
                             </div>
                         </div>
@@ -115,19 +115,19 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                                function submitBtn() {
-                                    var rollId = $("#floatingInput").val();
-                                    console.log(rollId);
-                                    $.ajax({
-                                        url: 'mark-report',
-                                        data: {'rollId': rollId},
-                                        type: "POST",
-                                        success: function (text) {
-                                            document.getElementById("body").innerHTML = text;
-                                            $('#reportModal').modal('show'); // Open the modal
-                                        }
-                                    });
-                                }
+                                    function submitBtn() {
+                                        var rollId = $("#floatingInput").val();
+                                        console.log(rollId);
+                                        $.ajax({
+                                            url: 'mark-report',
+                                            data: {'rollId': rollId},
+                                            type: "POST",
+                                            success: function (text) {
+                                                document.getElementById("body").innerHTML = text;
+                                                $('#reportModal').modal('show'); // Open the modal
+                                            }
+                                        });
+                                    }
         </script>
     </body>
 
