@@ -231,6 +231,11 @@ function openDeleteModalAdmin(id, role) {
             document.getElementById('body').innerHTML = 'Are you sure you want to delete this course?';
             $('#deleteButton').attr('href', 'delete-course?id=' + id);
             break;
+        case 'teachers':
+            $('#deleteModal').modal('show');
+            document.getElementById('body').innerHTML = 'Are you sure you want to delete this teacher?';
+            $('#deleteButton').attr('href', 'delete-teacher?id=' + id);
+            break;
     }
 
 

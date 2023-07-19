@@ -65,7 +65,7 @@
                     <a href="manage-courses" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Manage Courses</a>
                     <a href="manage-classes" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Manage Classes</a>
                     <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Manage Students</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Manage Teachers</a>
+                    <a href="manage-teachers" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Manage Teachers</a>
                     <%
                         }
                     %>

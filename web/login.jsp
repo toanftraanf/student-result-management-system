@@ -53,11 +53,11 @@
                                 <!-- Login Form Start -->
                                 <form action="login" method="POST">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username">
+                                        <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username" required>
                                         <label for="floatingInput">Username</label>
                                     </div>
                                     <div class="form-floating mb-4">
-                                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
                                         <label for="floatingPassword">Password</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">

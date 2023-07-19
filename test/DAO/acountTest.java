@@ -13,6 +13,6 @@ import dal.AccountsDAO;
 public class acountTest {
     public static void main(String[] args) {
         AccountsDAO a = new AccountsDAO();
-        System.out.println(a.getAccounts("toantran11", "123456"));
+        System.out.println(a.getAccountByTeacherId(1).getUsername());
     }
 }

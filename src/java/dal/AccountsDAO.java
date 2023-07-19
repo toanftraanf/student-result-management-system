@@ -90,4 +90,20 @@ public class AccountsDAO extends DBContext {
         }
         return null;
     }
+    
+    public Accounts getAccountByTeacherId(int teacherId) {
+        String sql = "SELECT * FROM accounts WHERE teacherId = ?";
+        TeachersDAO tdao = new TeachersDAO();
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, teacherId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Accounts(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getInt("role"), tdao.getTeacherById(rs.getInt("teacherId")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
